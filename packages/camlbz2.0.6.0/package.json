@@ -1,0 +1,27 @@
+{
+  "build": [
+    [
+      "bash",
+      "-c",
+      "#{os == 'windows' ? 'patch -p1 < camlbz2.0.6.0.patch' : 'true'}"
+    ],
+    ["./configure", "--prefix", "#{self.install}", "--with-findlib"],
+    ["make", "CLIBSDIR=-L#{bzip2.install}"]
+  ],
+  "install": [
+    ["make", "install", "CLIBSDIR=-L#{bzip2.install}"]
+  ],
+  "dependencies": {
+    "bzip2": "*"
+  },
+  "buildEnv": {
+    "CPPFLAGS": "-I#{bzip2.install}/include $CPPFLAGS",
+    "LDFLAGS": "-L#{bzip2.install}/lib $LDFLAGS"
+  },
+  "exportedEnv": {
+    "CAML_LD_LIBRARY_PATH": {
+      "val": "#{self.install / 'lib' / 'camlbz2' : $CAML_LD_LIBRARY_PATH}",
+      "scope": "global"
+    }
+  }
+}
