@@ -3,13 +3,13 @@
     [
       "bash",
       "-c",
-      "#{os == 'windows' ? 'patch -p1 < camlbz2.0.6.0.patch' : 'true'}"
+      "#{os == 'windows' ? 'patch -p1 < camlbz2-0.6.0.patch' : 'true'}"
     ],
     ["./configure", "--prefix", "#{self.install}", "--with-findlib"],
-    ["make", "CLIBSDIR=-L#{bzip2.install}"]
+    ["make", "CLIBSDIR=-L#{bzip2.install}/lib"]
   ],
   "install": [
-    ["make", "install", "CLIBSDIR=-L#{bzip2.install}"]
+    ["make", "install", "CLIBSDIR=-L#{bzip2.install}/lib"]
   ],
   "dependencies": {
     "bzip2": "*"

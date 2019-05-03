@@ -1,11 +1,14 @@
 {
   "build": [
     [
-      "cc",
+      "x86_64-w64-mingw32-gcc",
       "-c",
       "${CFLAGS:--g}",
       "-I/usr/local/include",
       "test.c"
     ]
-  ]
+  ],
+  "dependencies": {
+    "gmp": "*"
+  }
 }
